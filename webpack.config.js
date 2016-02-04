@@ -11,8 +11,12 @@ module.exports = {
             'zepto-core': 'js/core/libs/zepto/zepto-core',
             // UI sub-project
             ui: 'js/ui',
-            backgrid: 'js/ui/libs/backbone-plugins/backgrid',
-            'text!': './node_modules/raw-loader/index'
+            backgrid: 'js/ui/libs/backbone-plugins/backgrid'
+        }
+    },
+    resolveLoader: {
+        alias: {
+            text: 'raw-loader'
         }
     }
 };

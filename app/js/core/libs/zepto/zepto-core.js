@@ -1,8 +1,6 @@
 define(
     'zepto-core',
     function() {
-        console.error(1);
-
         var Zepto = (function() {
             var undefined, key, $, classList, emptyArray = [], slice = emptyArray.slice, filter = emptyArray.filter,
                 document = window.document,
