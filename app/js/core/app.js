@@ -60,12 +60,12 @@ define(
 
         function getTemplates(templatesArr, callback) {
             if (templatesArr.length) {
-                console.error(1);
-                /*var preparedTemplates = templatesArr.map(function(element) {
-                    return 'text!templates/' + element + '.tpl';
+                debugger;
+                var preparedTemplates = templatesArr.map(function(element) {
+                    return 'html!templates/' + element + '.tpl';
                 });
 
-                require(preparedTemplates, function() {
+                /*require(preparedTemplates, function() {
                     if (typeof callback === 'function') callback.apply(this, arguments);
                 });*/
             }

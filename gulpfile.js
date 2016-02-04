@@ -27,10 +27,10 @@ gulp.task('build-css', ['compile-scss'], function() {
         .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('build-core-min-js', function() {
+gulp.task('build-core-min-js', ['build-ui-min-js'], function() {
     return gulp.src(['./app/js/core/main-core.js'])
 
-        .pipe(webpack(require('./app/js/core/webpack.config.js')))
+        .pipe(webpack(require('./webpack.config.js')))
         .pipe(concat('core.min.js'))
         .pipe(gulp.dest('dist/js'));
 });
@@ -38,7 +38,7 @@ gulp.task('build-core-min-js', function() {
 gulp.task('build-ui-min-js', function() {
     return gulp.src(['./app/js/ui/main-ui.js'])
 
-        .pipe(webpack(require('./app/js/ui/webpack.config.js')))
+        .pipe(webpack(require('./webpack.config.js')))
         .pipe(concat('ui.min.js'))
         .pipe(gulp.dest('dist/js'));
 });
@@ -54,4 +54,4 @@ gulp.task('compile-scss', function() {
 });
 
 
-gulp.task('default', ['clean', 'runLocalServer', 'build-css', 'build-core-min-js', 'build-ui-min-js', 'compile-scss']);
+gulp.task('default', ['clean', 'runLocalServer', 'build-css', 'build-core-min-js' , 'compile-scss']);

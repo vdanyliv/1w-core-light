@@ -11,7 +11,8 @@ module.exports = {
             'zepto-core': 'js/core/libs/zepto/zepto-core',
             // UI sub-project
             ui: 'js/ui',
-            backgrid: 'js/ui/libs/backbone-plugins/backgrid'
+            backgrid: 'js/ui/libs/backbone-plugins/backgrid',
+            'text!': './node_modules/raw-loader/index'
         }
     }
 };
