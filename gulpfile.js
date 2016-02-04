@@ -1,13 +1,23 @@
 var gulp = require('gulp');
 var compass = require('gulp-compass');
 var concat = require('gulp-concat');
-var requirejsOptimize = require('gulp-requirejs-optimize');
+var webpack = require('gulp-webpack');
 var minify = require('gulp-minify-css');
 var clean = require('gulp-clean');
+
+/*task for local server*/
+var connect = require('gulp-connect');
 
 gulp.task('clean', function () {
     return gulp.src('./dist', { read: false })
         .pipe(clean());
+});
+
+gulp.task('runLocalServer', function() {
+    connect.server({
+        port: 6042,
+        root: './'
+    });
 });
 
 gulp.task('build-css', ['compile-scss'], function() {
@@ -20,24 +30,7 @@ gulp.task('build-css', ['compile-scss'], function() {
 gulp.task('build-core-min-js', function() {
     return gulp.src(['./app/js/core/main-core.js'])
 
-        .pipe(requirejsOptimize({
-            baseUrl: './app',
-            name: 'js/core/main-core',
-            mainConfigFile: 'app/js/core/main-core.js',
-            optimize: 'uglify2',
-            //optimize: 'none',
-            throwWhen: {
-                optimize: true
-            },
-            findNestedDependencies: true,
-            paths: {
-                requireLib: './js/core/libs/require-2.1.22',
-                'requirejs-config': 'empty'
-            },
-            include: ['requireLib'],
-            optimizeAllPluginResources: true,
-            preserveLicenseComments: false
-        }))
+        .pipe(webpack(require('./app/js/core/webpack.config.js')))
         .pipe(concat('core.min.js'))
         .pipe(gulp.dest('dist/js'));
 });
@@ -45,23 +38,7 @@ gulp.task('build-core-min-js', function() {
 gulp.task('build-ui-min-js', function() {
     return gulp.src(['./app/js/ui/main-ui.js'])
 
-        .pipe(requirejsOptimize({
-            baseUrl: './app',
-            name: 'js/ui/main-ui',
-            mainConfigFile: 'app/js/ui/main-ui.js',
-            optimize: 'uglify2',
-            //optimize: 'none',
-            throwWhen: {
-                optimize: true
-            },
-            findNestedDependencies: true,
-            paths: {
-                requireLib: './js/core/libs/require-2.1.22'
-            },
-            include: ['requireLib'],
-            optimizeAllPluginResources: true,
-            preserveLicenseComments: false
-        }))
+        .pipe(webpack(require('./app/js/ui/webpack.config.js')))
         .pipe(concat('ui.min.js'))
         .pipe(gulp.dest('dist/js'));
 });
@@ -75,3 +52,6 @@ gulp.task('compile-scss', function() {
         }))
         .pipe(gulp.dest('./app/css'));
 });
+
+
+gulp.task('default', ['clean', 'runLocalServer', 'build-css', 'build-core-min-js', 'build-ui-min-js', 'compile-scss']);

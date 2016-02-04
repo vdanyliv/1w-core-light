@@ -60,13 +60,14 @@ define(
 
         function getTemplates(templatesArr, callback) {
             if (templatesArr.length) {
-                var preparedTemplates = templatesArr.map(function(element) {
+                console.error(1);
+                /*var preparedTemplates = templatesArr.map(function(element) {
                     return 'text!templates/' + element + '.tpl';
                 });
 
                 require(preparedTemplates, function() {
                     if (typeof callback === 'function') callback.apply(this, arguments);
-                });
+                });*/
             }
             else {
                 if (typeof callback === 'function') callback();
