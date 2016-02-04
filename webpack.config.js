@@ -1,4 +1,27 @@
+'use strict';
+
+var webpack = require('webpack');
+
 module.exports = {
+    entry: {
+        ui: './app/js/ui/main-ui.js'
+    },
+    output: {
+        path: __dirname + 'dist/js',
+        filename: 'ui.min.js'
+    },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                drop_console: true,
+                unsafe: true
+            }
+        }),
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 1
+        })
+    ],
     resolve: {
         modulesDirectories: ['./'],
         alias: {
