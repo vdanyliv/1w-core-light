@@ -2,7 +2,7 @@ define(
     'ui/views/demo',
     [
         'app',
-        'raw!templates/demo.tpl'
+        'text!templates/demo.tpl'
     ],
     function (App, tpl) {
         var DemoView = App.View.defaultView.extend({

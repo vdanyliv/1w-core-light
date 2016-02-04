@@ -11,10 +11,8 @@
   if (typeof define === 'function' && define.amd) {
     // AMD
     define(['underscore', 'jquery', 'exports'], function(_, $, exports) {
-        console.error(2);
       // Export global even in AMD case in case this script is loaded with
       // others that may still expect a global Backbone.
-        console.error('define');
 
         root.Backbone = factory(root, exports, _, $);
     });
@@ -26,10 +24,6 @@
     root.Backbone = factory(root, {}, root._, (root.jQuery || root.Zepto || root.ender || root.$));
   }
 }(this, function(root, Backbone, _, $) {
-
-    console.error('factory');
-    console.log(arguments);
-
   // Initial Setup
   // -------------
 

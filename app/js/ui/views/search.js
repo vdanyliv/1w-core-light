@@ -5,7 +5,7 @@ define(
         'ui/collections/polls-collection',
         'backgrid',
         'ui/views/backgrid-columns-configs',
-        'raw!templates/search.tpl',
+        'text!templates/search.tpl',
         'ui/helpers/locales'
     ],
     function (App, pollsCollection, Backgrid, BackgridColumnsConfig, tpl, Languages) {

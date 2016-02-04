@@ -20,6 +20,10 @@ gulp.task('runLocalServer', function() {
     });
 });
 
+gulp.task('js-watch', function() {
+    gulp.watch('app/js/**/*.js', ['build-ui-min-js']);
+});
+
 gulp.task('build-css', ['compile-scss'], function() {
     gulp.src(['./app/css/**/*.css'])
         .pipe(concat('ui.min.css'))
