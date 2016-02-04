@@ -16,6 +16,9 @@ module.exports = {
                 warnings: false,
                 drop_console: true,
                 unsafe: true
+            },
+            output: {
+                comments: false
             }
         }),
         new webpack.optimize.LimitChunkCountPlugin({
