@@ -14,7 +14,6 @@ define(
             },
             search: function () {
                 App.createPage({
-                    //templates: ['search'],
                     css: ['search'],
                     view: Search,
                     urlArguments: arguments
@@ -22,7 +21,6 @@ define(
             },
             demo: function () {
                 App.createPage({
-                    //templates: ['demo'],
                     css: ['demo'],
                     view: Demo,
                     urlArguments: arguments

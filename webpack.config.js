@@ -1,6 +1,7 @@
 'use strict';
 
 var webpack = require('webpack');
+var NODE_ENV = process.env.NODE_ENV || 'production';
 
 module.exports = {
     entry: {
@@ -23,6 +24,9 @@ module.exports = {
         }),
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 1
+        }),
+        new webpack.DefinePlugin({
+            NODE_ENV: JSON.stringify(NODE_ENV)
         })
     ],
     resolve: {
@@ -31,6 +35,7 @@ module.exports = {
             // Core sub-project
             core: 'js/core',
             app: 'js/core/app',
+            config: 'js/core/config',
             jquery: 'js/core/libs/zepto/zepto-loader',
             underscore: 'js/core/libs/underscore-1.6.0',
             backbone: 'js/core/libs/backbone-amd-1.1.0',

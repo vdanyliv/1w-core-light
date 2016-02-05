@@ -11,4 +11,8 @@
 
 <tpl id="tplChild2">
     Child-2 tpl
+
+    <br>
+    <br>
+    <%= $.i18n.prop('overall.survey_manager.builder.add_page') %>
 </tpl>
