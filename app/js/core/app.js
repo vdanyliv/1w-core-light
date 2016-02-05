@@ -1,12 +1,13 @@
 define(
     'app',
     [
+        'config',
         'core/views/default-view',
         'core/collections/default-collection',
         'core/models/default-model',
         'core/routers/default-router'
     ],
-    function(defaultView, defaultCollection, defaultModel, defaultRouter) {
+    function(Config, defaultView, defaultCollection, defaultModel, defaultRouter) {
         var App = {
             View: {
                 defaultView: defaultView
@@ -22,19 +23,16 @@ define(
             }
         };
 
-        App.config = {
-            environment: '/* @echo NODE_ENV */' || 'development'
-        };
+        App.config = Config;
 
         App.createPage = function(params) {
             var urlArguments = params.urlArguments ? argumentsToArray(params.urlArguments) : null,
                 View = params.view || App.View.defaultView,
-                templatesArr = params.templates || [],
                 cssArr = params.css || [];
 
             addCss(cssArr);
 
-            getTemplates(templatesArr, function() {
+            $.i18n.properties(function() {
                 App.createView(View, {
                     urlArguments: urlArguments,
                     rawTemplates: argumentsToArray(arguments).join('')
@@ -51,27 +49,11 @@ define(
         };
 
         function addCss(cssArr) {
-            if (App.config.environment !== 'production') {
+            if (App.config.environment === 'development') {
                 injectCss(cssArr);
             }
 
             addCssScopes(cssArr);
-        }
-
-        function getTemplates(templatesArr, callback) {
-            if (templatesArr.length) {
-                debugger;
-                var preparedTemplates = templatesArr.map(function(element) {
-                    return 'html!templates/' + element + '.tpl';
-                });
-
-                /*require(preparedTemplates, function() {
-                    if (typeof callback === 'function') callback.apply(this, arguments);
-                });*/
-            }
-            else {
-                if (typeof callback === 'function') callback();
-            }
         }
 
         function injectCss(cssArr) {

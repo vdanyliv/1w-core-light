@@ -1,10 +1,15 @@
 define(
     'ui/views/demo',
-    [
-        'app',
-        'text!templates/demo.tpl'
-    ],
-    function (App, tpl) {
+    function (require, module, exports) {
+        var App = require('app');
+        var tpl = require('text!templates/demo.tpl');
+
+        var Settings = {};
+            Settings.autoComplete = require('core/helpers/settings/auto-complete')();
+            Settings.bannerTypes = require('core/helpers/settings/banner-types')();
+
+        console.log('Settings', Settings);
+
         var DemoView = App.View.defaultView.extend({
             el: '#main',
             template: 'tplDemo',
